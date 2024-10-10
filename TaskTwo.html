@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Job Application</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='TaskTwo.css'>
+  
+</head>
+
+<body>
+  <div class="jobdata">
+    <form id="jobApplicationForm" onsubmit="validateForm(event)" enctype="multipart/form-data">
+      <label><h3>First Name: <input type="text" id="firstName" /></h3></label>
+
+      <label><h3>Last Name: <input type="text" id="lastName" /></h3></label>
+
+      <label><h3>Email: <input type="email" id="email" /></h3></label>
+
+      <label><h3>Phone: <input type="tel" id="phone" /></h3></label>
+
+      <label><h3>Address: <input type="text" id="address" /></h3></label>
+
+      <label><h3>City: <input type="text" id="city" /></h3></label>
+
+      <label><h3>State: <input type="text" id="state" /></h3></label>
+
+      <label><h3>ZIP: <input type="number" id="zip" /></h3></label>
+
+      <label><h3>Country:
+        <select id="country-select">
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+        </select>
+      </h3></label>
+
+      <label><h3>Education Level:
+        <select id="education-level">
+          <option value="highschool">High School</option>
+          <option value="bachelor">Bachelor's Degree</option>
+          <option value="master">Master's Degree</option>
+          <option value="phd">PhD</option>
+        </select>
+      </h3></label>
+
+      <label><h3>Education Type:
+        <select id="education-type">
+          <option value="science">Science</option>
+          <option value="arts">Arts</option>
+          <option value="commerce">Commerce</option>
+        </select>
+      </h3></label>
+
+      <label><h3>Resume: <input type="file" id="resume" accept=".pdf,.doc,.docx" /></h3></label>
+
+      <label><h3>Cover Letter: (optional) <textarea id="coverLetter"></textarea></h3></label>
+
+      <label><h3>Are you currently employed? <input type="checkbox" id="employed" onclick="toggleEmployerField()" /></h3></label>
+
+      <div id="currentEmployerDiv" style="display:none;">
+        <label><h3>Current Employer: <textarea id="currentEmployer"></textarea></h3></label>
+      </div>
+
+      <label><h3>Years of Experience: <input type="number" id="yearsExperience" /></h3></label>
+
+      <label><h3>Jobs you want to apply for:
+        <select id="jobApply" multiple>
+          <option value="developer">Developer</option>
+          <option value="tester">Tester</option>
+          <option value="designer">Designer</option>
+        </select>
+      </h3></label>
+
+      <br>
+      <input type="submit" value="SUBMIT" style="background:linear-gradient(45deg,white,gold);" />
+    </form>
+  </div>
+
+  <script>
+    function toggleEmployerField() {
+      const employedCheckbox = document.getElementById('employed');
+      const employerDiv = document.getElementById('currentEmployerDiv');
+      employerDiv.style.display = employedCheckbox.checked ? 'block' : 'none';
+    }
+
+    function validateForm(event) {
+      event.preventDefault();
+
+      let isValid = true;
+      const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'state', 'zip', 'country-select', 'education-level', 'education-type', 'resume', 'yearsExperience', 'jobApply'];
+      requiredFields.forEach(field => {
+        const element = document.getElementById(field);
+        if (element.value.trim() === '') {
+          alert(`${field.replace("-", " ")} is required.`);
+          isValid = false;
+        }
+      });
+
+      const zip = document.getElementById('zip').value;
+      if (isNaN(zip) || zip <= 0) {
+        alert('ZIP must be a positive number.');
+        isValid = false;
+      }
+
+      const yearsExperience = document.getElementById('yearsExperience').value;
+      if (isNaN(yearsExperience) || yearsExperience < 0) {
+        alert('Years of experience must be a non-negative number.');
+        isValid = false;
+      }
+
+      if (isValid) {
+        alert('Form submitted successfully.');
+        document.getElementById("jobApplicationForm").submit();
+      }
+    }
+  </script>
+
+</body>
+<footer>
+  <div align="center" style="color: white;">
+    <h3>&copy; ALL rights reserved</h3>
+  </div>
+</footer>
+
+</html>

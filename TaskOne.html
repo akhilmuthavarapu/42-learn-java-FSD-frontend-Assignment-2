@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Enter Job Data</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel='stylesheet' type='text/css' media='screen' href='TaskOne.css'>
+  <script>
+    function validateForm(event) {
+
+      event.preventDefault();
+
+
+      const title = document.querySelector('input[type="text"]').value;
+      const type = document.getElementById('type_id').value;
+      const dept = document.getElementById('dept_id').value;
+      const country = document.getElementById('country-select').value;
+      const description = document.querySelector('input[placeholder="Enter Description"]').value;
+      const date = document.getElementById('dob').value;
+
+      let isValid = true;
+      let errorMessage = '';
+
+
+      if (!title) {
+        errorMessage += 'Title cannot be blank.\n';
+        isValid = false;
+      }
+      if (!description) {
+        errorMessage += 'Description cannot be blank.\n';
+        isValid = false;
+      }
+      if (!type) {
+        errorMessage += 'Please select a Job Type.\n';
+        isValid = false;
+      }
+      if (!dept) {
+        errorMessage += 'Please select a Department.\n';
+        isValid = false;
+      }
+      if (!country) {
+        errorMessage += 'Please select a Country.\n';
+        isValid = false;
+      }
+
+
+      const selectedDate = new Date(date);
+      const currentDate = new Date();
+
+      if (!date) {
+        errorMessage += 'Please select a date.\n';
+        isValid = false;
+      } else if (selectedDate > currentDate) {
+        errorMessage += 'Date cannot be in the future.\n';
+        isValid = false;
+      }
+
+
+      if (isValid) {
+        alert('Form submitted successfully!');
+        document.querySelector('form').submit();
+      } else {
+        alert(errorMessage);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="jobdata">
+    <form onsubmit="validateForm(event)">
+      <label>
+        <h3>Title:</h3>
+      </label><input type="text" placeholder="Enter Job Title" />
+      <label for="type">
+        <h3>Choose Type:</h3>
+      </label>
+      <select name="type" id="type_id">
+        <option value="">Select Type</option>
+        <option value="intern">Intern</option>
+        <option value="testing">Testing</option>
+        <option value="development">Development</option>
+      </select>
+      <br>
+      <label for="dept">
+        <h3>Choose Department:</h3>
+      </label>
+      <select name="dept" id="dept_id">
+        <option value="">Select Department</option>
+        <option value="Production">Production Department</option>
+        <option value="Test">Testing Department</option>
+        <option value="Development">Development Department</option>
+        <option value="Accounts">Auditing Department</option>
+      </select>
+      <br>
+      <label for="Country">
+        <h3>Choose Country:</h3>
+      </label>
+      <select name="countries" id="country-select">
+        <option value="">Select Country</option>
+
+      </select>
+      <br>
+      <label>
+        <h3>Description:</h3>
+      </label><input type="text" placeholder="Enter Description" />
+      <label for="dob">
+        <h3>Choose Opening Date:</h3>
+      </label>
+      <input type="date" id="dob" required>
+      <br><br>
+      <input type="submit" value="SUBMIT" style="background:linear-gradient(45deg,white,gold);" />
+    </form>
+  </div>
+</body>
+
+<footer>
+  <div align="center" style="color: white;">
+    <h3>&copy; ALL rights reserved</h3>
+  </div>
+</footer>
+
+</html>
